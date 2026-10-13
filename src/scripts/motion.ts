@@ -95,7 +95,7 @@ function initParallax() {
 function initMutate() {
   $$('[data-mutate]').forEach((el) => {
     gsap.set(el, { autoAlpha: 1 });
-    const split = SplitText.create(el.querySelectorAll('.hero__line'), { type: 'chars', mask: 'chars', charsClass: 'split-char' });
+    const split = SplitText.create(el.querySelectorAll('.hero__line'), { type: 'chars', mask: 'chars', charsClass: 'split-char', aria: 'hidden' });
     const chars = split.chars as HTMLElement[];
     const MIN = 200, MAX = 900, BASE = 400, RADIUS = 260;
 
@@ -155,7 +155,7 @@ function initHighlight() {
   const from = css.getPropertyValue('--color-line').trim();
   const to = css.getPropertyValue('--color-text-strong').trim();
   $$('[data-highlight]').forEach((el) => {
-    const split = SplitText.create(el, { type: 'words' });
+    const split = SplitText.create(el, { type: 'words', aria: 'none' });
     gsap.fromTo(split.words, { color: from }, {
       color: to, ease: 'none', stagger: 0.1,
       scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
@@ -167,7 +167,7 @@ function initHighlight() {
 function initWordmark() {
   const el = document.querySelector<HTMLElement>('[data-wordmark]');
   if (!el) return;
-  const split = SplitText.create(el, { type: 'chars', mask: 'chars', charsClass: 'split-char' });
+  const split = SplitText.create(el, { type: 'chars', mask: 'chars', charsClass: 'split-char', aria: 'hidden' });
   gsap.from(split.chars, {
     yPercent: 100, ease: 'none', stagger: 0.05,
     scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom bottom', scrub: true },

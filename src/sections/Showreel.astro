@@ -5,7 +5,8 @@ import { legacyAssets } from '../data/site';
 <section class="reel" aria-label="Showreel" data-reel>
   <div class="reel__sticky">
     <div class="reel__frame" data-reel-frame>
-      <video src={legacyAssets.reel} muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+      <!-- Sem autoplay e sem pré-carregamento: o vídeo só baixa e toca quando chega perto da tela -->
+      <video src={legacyAssets.reel} muted loop playsinline preload="none" aria-hidden="true"></video>
     </div>
     <p class="reel__label" data-reel-label>Showreel 2026</p>
   </div>

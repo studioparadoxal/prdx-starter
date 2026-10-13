@@ -10,7 +10,7 @@
   --color-line: #e7e7e5;        /* divisórias e bordas */
   --color-text: #3d3d3b;        /* texto corrido */
   --color-text-strong: #1c1c1b; /* títulos */
-  --color-text-muted: #8c8c88;  /* legendas, metadados */
+  --color-text-muted: #6f6f6b;  /* legendas, metadados (mínimo 4.5:1 de contraste no branco, WCAG AA) */
   --color-action: #1c1c1b;      /* botões */
   --color-action-text: #ffffff;
 
