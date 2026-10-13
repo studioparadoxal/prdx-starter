@@ -152,7 +152,8 @@ function initReel() {
 /* Manifesto: cada palavra passa de cinza claro a escuro conforme a leitura avança */
 function initHighlight() {
   const css = getComputedStyle(document.documentElement);
-  const from = css.getPropertyValue('--color-line').trim();
+  // Ponto de partida legível (contraste mínimo 3:1 para texto grande), para o efeito não esconder conteúdo
+  const from = css.getPropertyValue('--color-text-faint').trim();
   const to = css.getPropertyValue('--color-text-strong').trim();
   $$('[data-highlight]').forEach((el) => {
     const split = SplitText.create(el, { type: 'words', aria: 'none' });
