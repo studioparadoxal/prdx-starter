@@ -57,7 +57,7 @@ function initReveal() {
     gsap.fromTo(el, { autoAlpha: 0, y: 32 }, {
       autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out',
       ...(inFirstView
-        ? { delay: 0.9 }
+        ? { delay: 0.4 }
         : { scrollTrigger: { trigger: el, start: 'top 90%', once: true } }),
     });
   });
@@ -99,12 +99,25 @@ function initMutate() {
     const chars = split.chars as HTMLElement[];
     const MIN = 200, MAX = 900, BASE = 400, RADIUS = 260;
 
+    // Trava a largura de cada letra (em "em", acompanha o tamanho da fonte) no peso base.
+    // Assim a mudança de peso só redesenha a letra, sem empurrar as vizinhas:
+    // zero layout shift (CLS), que o Google mede nos Core Web Vitals.
+    const fontSize = parseFloat(getComputedStyle(el).fontSize);
+    chars.forEach((c) => {
+      c.style.width = `${c.getBoundingClientRect().width / fontSize}em`;
+      c.style.textAlign = 'center';
+    });
+
     const weights = chars.map(() => ({ w: BASE }));
     const render = () => chars.forEach((c, i) => { c.style.fontVariationSettings = `'wght' ${weights[i].w.toFixed(0)}`; });
 
     gsap.from(chars, {
       yPercent: 110, duration: 1.2, ease: 'power4.out', stagger: 0.025, delay: 0.15,
-      onComplete: () => (finePointer ? followPointer() : breathe()),
+      onComplete: () => {
+        // Depois da entrada, libera a máscara para a letra mais pesada poder crescer além da caixa
+        split.masks.forEach((m) => { (m as HTMLElement).style.overflow = 'visible'; });
+        finePointer ? followPointer() : breathe();
+      },
     });
 
     function followPointer() {
