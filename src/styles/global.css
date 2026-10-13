@@ -1,0 +1,61 @@
+@import './tokens.css';
+
+/* Transição nativa entre páginas (View Transitions, sem JavaScript) */
+@view-transition { navigation: auto; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+/* Lenis controla o scroll; estas classes vêm da própria biblioteca */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-heading);
+  color: var(--color-text-strong);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: var(--tracking-display);
+  text-transform: none;
+}
+
+img, video, svg { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; letter-spacing: inherit; text-transform: inherit; }
+
+:focus-visible { outline: 2px solid var(--color-text-strong); outline-offset: 3px; }
+
+.container { width: 100%; max-width: var(--max-width); margin-inline: auto; padding-inline: var(--gutter); }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Estado inicial das animações só quando o JS está ativo (sem JS, tudo aparece) */
+html.js [data-reveal], html.js [data-mutate] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal], html.js [data-mutate] { opacity: 1; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Cabeçalho de seção reutilizado em todo o site */
+.section-head { display: grid; gap: var(--space-6); margin-bottom: var(--space-16); }
+.section-head__label { font-size: var(--text-xs); color: var(--color-text-muted); }
+.section-head__title { font-size: var(--text-xl); font-weight: 400; max-width: 14ch; }
+
+/* Máscaras do SplitText: folga para descendentes (g, j, p) e letras com espaçamento negativo não serem cortados */
+.split-line-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.split-char-mask { padding: 0 0.06em 0.14em; margin: 0 -0.06em -0.14em; }

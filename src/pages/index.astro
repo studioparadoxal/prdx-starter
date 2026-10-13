@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../sections/Hero.astro';
+import Showreel from '../sections/Showreel.astro';
+import Clients from '../sections/Clients.astro';
+import Cases from '../sections/Cases.astro';
+import Services from '../sections/Services.astro';
+import Labs from '../sections/Labs.astro';
+import About from '../sections/About.astro';
+import Footer from '../sections/Footer.astro';
+---
+<Base
+  title="Studio Paradoxal · Branding, design e tecnologia"
+  description="Studio de branding, design e tecnologia em São Paulo. Criamos e aceleramos marcas criativas no Brasil e no mundo."
+>
+  <a class="sr-only" href="#main">Pular para o conteúdo</a>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Showreel />
+    <Clients />
+    <Cases />
+    <Services />
+    <Labs />
+    <About />
+  </main>
+  <Footer />
+</Base>

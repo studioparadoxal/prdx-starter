@@ -1,0 +1,26 @@
+---
+interface Props { href: string; variant?: 'solid' | 'line'; external?: boolean }
+const { href, variant = 'solid', external = false } = Astro.props;
+---
+<a class:list={['btn', `btn--${variant}`]} href={href} {...external && { target: '_blank', rel: 'noopener' }}>
+  <span class="btn__label"><slot /></span>
+  <span class="btn__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm); line-height: 1;
+    border: 1px solid var(--color-action);
+    transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+  .btn--solid { background: var(--color-action); color: var(--color-action-text); }
+  .btn--line { color: var(--color-text-strong); }
+  .btn__arrow { display: inline-block; transition: transform 0.4s var(--ease-out); }
+  @media (hover: hover) {
+    .btn--solid:hover { background: transparent; color: var(--color-text-strong); }
+    .btn--line:hover { background: var(--color-action); color: var(--color-action-text); }
+    .btn:hover .btn__arrow { transform: translateX(4px); }
+  }
+</style>

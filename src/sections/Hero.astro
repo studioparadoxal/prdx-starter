@@ -1,0 +1,61 @@
+---
+import Button from '../components/Button.astro';
+import { contact } from '../data/site';
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <p class="hero__eyebrow" data-reveal>Studio de branding, design e tecnologia · São Paulo</p>
+
+    <!--
+      Assinatura da página: a fonte Urbanist é variável (peso de 100 a 900).
+      O peso de cada letra muda conforme o cursor se aproxima. A marca "muta".
+    -->
+    <h1 id="hero-title" class="hero__title" data-mutate>
+      <span class="hero__line">Paradoxais,</span>
+      <span class="hero__line">criativos &amp;</span>
+      <span class="hero__line hero__line--last">mutantes.</span>
+    </h1>
+
+    <div class="hero__foot">
+      <ul class="hero__disciplines" data-reveal>
+        <li>// design</li>
+        <li>// branding</li>
+        <li>// content</li>
+      </ul>
+      <div class="hero__actions" data-reveal>
+        <Button href={contact.whatsapp} external>Let's talk</Button>
+        <Button href={contact.labs} variant="line" external>Acesse o LA/BS®</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { min-height: 100svh; display: flex; padding-top: 3.5rem; }
+  .hero__inner {
+    display: grid; grid-template-rows: auto 1fr auto; gap: var(--space-8);
+    padding-block: var(--space-12) var(--space-8);
+  }
+  .hero__eyebrow { font-size: var(--text-xs); color: var(--color-text-muted); }
+  .hero__title {
+    align-self: center;
+    font-size: clamp(3.5rem, 0.5rem + 14vw, 12rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    font-variation-settings: 'wght' 400;
+  }
+  .hero__line { display: block; }
+  .hero__line--last { padding-left: 18%; }
+  .hero__foot {
+    display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap;
+    padding-top: var(--space-6); border-top: 1px solid var(--color-line);
+  }
+  .hero__disciplines { display: flex; gap: var(--space-6); list-style: none; font-size: var(--text-sm); }
+  .hero__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  @media (max-width: 640px) {
+    .hero__title { font-size: 18.5vw; }
+    .hero__line--last { padding-left: 0; }
+    .hero__disciplines { gap: var(--space-4); }
+  }
+</style>

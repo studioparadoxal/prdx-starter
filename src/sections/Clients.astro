@@ -1,0 +1,40 @@
+---
+import { clients } from '../data/site';
+---
+<section class="clients" aria-labelledby="clients-title">
+  <div class="container clients__head">
+    <h2 id="clients-title" class="clients__title">Marcas que passaram por aqui</h2>
+  </div>
+  <!-- Marquee: a lista aparece duas vezes para o loop fechar sem emenda -->
+  <div class="marquee">
+    {[0, 1].map((copy) => (
+      <ul class="marquee__track" aria-hidden={copy === 1 ? 'true' : undefined}>
+        {clients.map((c) => <li class="marquee__item">{c}</li>)}
+      </ul>
+    ))}
+  </div>
+</section>
+
+<style>
+  .clients { padding-block: var(--space-section) var(--space-16); }
+  .clients__head { margin-bottom: var(--space-8); }
+  .clients__title { font-family: var(--font-body); font-size: var(--text-xs); font-weight: 400; color: var(--color-text-muted); letter-spacing: var(--tracking-mono); text-transform: uppercase; line-height: 1.6; }
+  .marquee {
+    display: flex; overflow: hidden; border-block: 1px solid var(--color-line);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee__track {
+    display: flex; flex-shrink: 0; list-style: none;
+    animation: marquee 40s linear infinite;
+  }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  .marquee__item {
+    padding: var(--space-8) var(--space-12);
+    font-family: var(--font-heading); text-transform: none; letter-spacing: -0.02em;
+    font-size: var(--text-lg); color: var(--color-text-muted); white-space: nowrap;
+    transition: color 0.3s;
+  }
+  .marquee__item:hover { color: var(--color-text-strong); }
+  @keyframes marquee { to { transform: translateX(-100%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } .marquee { overflow-x: auto; } }
+</style>

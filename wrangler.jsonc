@@ -1,0 +1,6 @@
+// Configuração do Worker na Cloudflare (lida pelo Wrangler e pelo Workers Builds).
+{
+  "name": "prdx-starter",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"]
+}

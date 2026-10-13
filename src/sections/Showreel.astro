@@ -1,0 +1,32 @@
+---
+import { legacyAssets } from '../data/site';
+---
+<!-- O vídeo começa recortado no centro e se abre até ocupar a tela, acompanhando o scroll -->
+<section class="reel" aria-label="Showreel" data-reel>
+  <div class="reel__sticky">
+    <div class="reel__frame" data-reel-frame>
+      <video src={legacyAssets.reel} muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>
+    </div>
+    <p class="reel__label" data-reel-label>Showreel 2026</p>
+  </div>
+</section>
+
+<style>
+  .reel { position: relative; height: 220vh; }
+  .reel__sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+  .reel__frame {
+    position: absolute; inset: 0; background: var(--color-surface);
+    clip-path: inset(22% 30% 22% 30%);
+  }
+  .reel__frame video { width: 100%; height: 100%; object-fit: cover; }
+  .reel__label {
+    position: relative; z-index: 1; font-size: var(--text-xs); color: var(--color-action-text);
+    mix-blend-mode: difference;
+  }
+  @media (max-width: 640px) { .reel { height: 160vh; } .reel__frame { clip-path: inset(30% 8% 30% 8%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .reel { height: auto; }
+    .reel__sticky { position: relative; height: 70svh; }
+    .reel__frame { clip-path: none; }
+  }
+</style>

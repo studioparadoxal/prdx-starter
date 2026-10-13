@@ -1,0 +1,48 @@
+---
+import { legacyAssets, contact } from '../data/site';
+const links = [
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Cases', href: '#cases' },
+  { label: 'LA/BS®', href: '#labs' },
+  { label: 'Contato', href: '#contato' },
+];
+---
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="Studio Paradoxal, início">
+      <img src={legacyAssets.logo} alt="Studio Paradoxal" width="140" height="28" />
+    </a>
+    <nav aria-label="Principal">
+      <ul class="header__nav">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <p class="header__clock">
+      <span class="header__city">São Paulo</span>
+      <time data-clock aria-live="off">--:--</time>
+    </p>
+    <a class="header__cta" href={contact.whatsapp} target="_blank" rel="noopener">Let's talk</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--text-xs);
+  }
+  .header__inner { display: flex; align-items: center; gap: var(--space-8); height: 3.5rem; }
+  .header__logo img { height: 22px; width: auto; }
+  .header__nav { display: flex; gap: var(--space-6); list-style: none; }
+  .header__nav a, .header__cta { color: var(--color-text); transition: color 0.2s; }
+  .header__nav a:hover, .header__cta:hover { color: var(--color-text-strong); }
+  .header__clock { margin-left: auto; display: flex; gap: var(--space-2); color: var(--color-text-muted); }
+  .header__clock time { color: var(--color-text-strong); font-variant-numeric: tabular-nums; }
+  .header__cta { padding-left: var(--space-6); border-left: 1px solid var(--color-line); color: var(--color-text-strong); }
+  @media (max-width: 860px) {
+    .header__nav, .header__city { display: none; }
+    .header__inner { gap: var(--space-4); }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import { founders } from '../data/site';
+---
+<section id="sobre" class="about" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <header class="section-head about__head">
+      <p class="section-head__label">Sobre</p>
+      <h2 id="about-title" class="section-head__title" data-reveal="lines">Design como orientador. Estratégia como direção.</h2>
+    </header>
+
+    <div class="about__body">
+      <p data-reveal>
+        Criamos e impulsionamos marcas que nascem do desejo de impactar a vida das pessoas com produtos e serviços
+        inovadores, da concepção ao impacto no mundo. O design guia o processo, alinhado à estratégia de marca e
+        comunicação, e o resultado são expressões visuais e verbais que viram ponte entre pessoas e experiências marcantes.
+      </p>
+
+      <ul class="founders">
+        {founders.map((f) => (
+          <li class="founder" data-reveal>
+            <div class="founder__photo" aria-hidden="true"><span>Foto</span></div>
+            <p class="founder__name">{f.name}</p>
+            <p class="founder__role">{f.role}</p>
+            <p class="founder__links">
+              <a href={f.instagram} target="_blank" rel="noopener">Instagram</a>
+              <span aria-hidden="true">/</span>
+              <a href={f.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { padding-block: var(--space-section); border-top: 1px solid var(--color-line); }
+  .about__grid { display: grid; grid-template-columns: 5fr 7fr; gap: var(--gutter); }
+  .about__body { display: grid; gap: var(--space-16); font-size: var(--text-sm); max-width: 62ch; }
+  .founders { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); }
+  .founder { display: grid; align-content: start; gap: var(--space-2); }
+  /* PLACEHOLDER: trocar por <Image> com a foto de cada sócio */
+  .founder__photo {
+    aspect-ratio: 4 / 5; margin-bottom: var(--space-4);
+    background: var(--color-surface); display: grid; place-items: center;
+    font-size: var(--text-xs); color: var(--color-text-muted);
+  }
+  .founder__name {
+    font-family: var(--font-heading); text-transform: none; letter-spacing: -0.02em;
+    font-size: var(--text-lg); color: var(--color-text-strong); line-height: 1.1;
+  }
+  .founder__role { font-size: var(--text-xs); color: var(--color-text-muted); }
+  .founder__links { display: flex; gap: var(--space-2); font-size: var(--text-xs); }
+  .founder__links a { border-bottom: 1px solid var(--color-line); transition: border-color 0.2s; }
+  .founder__links a:hover { border-color: var(--color-text-strong); }
+  @media (max-width: 860px) { .about__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .founders { grid-template-columns: 1fr; } }
+</style>
